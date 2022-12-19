@@ -2,10 +2,13 @@ import UIKit
 
 final class ImagesListViewController: UIViewController {
     
+    // MARK: Private property
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
-
+    
+    // MARK: private IBOutlet
     @IBOutlet private weak var tableView: UITableView!
     
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -14,8 +17,8 @@ final class ImagesListViewController: UIViewController {
     }
 }
 
+//MARK: Configuration cell to ImagesListViewController
 extension ImagesListViewController {
-    
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         guard let image = UIImage(named: photosName[indexPath.row]) else { return }
         
@@ -27,6 +30,7 @@ extension ImagesListViewController {
         cell.likeButton.setImage(likeImage, for: .normal)
     }
     
+    // MARK: private func
     private func setImageLikeButton(with indexPath: IndexPath) -> UIImage {
         if indexPath.row % 2 == 0 {
             guard let image = UIImage(named: "active") else { return UIImage()}
@@ -38,6 +42,7 @@ extension ImagesListViewController {
     }
 }
 
+// MARK: Conform UITableViewDataSource
 extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,9 +60,11 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
+
+// MARK: Conform UITableViewDelegate
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        // Open image in full screen
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
