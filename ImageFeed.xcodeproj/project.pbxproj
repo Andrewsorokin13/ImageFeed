@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		AF6475152950802A0001C2C5 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6475142950802A0001C2C5 /* ImagesListCell.swift */; };
 		AF6475172950F1A60001C2C5 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6475162950F1A50001C2C5 /* Date+Extensions.swift */; };
-		AF64751D2950FBED0001C2C5 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF64751B2950FBEC0001C2C5 /* YS Display-Bold.ttf */; };
-		AF64751E2950FBED0001C2C5 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF64751C2950FBEC0001C2C5 /* YS Display-Medium.ttf */; };
 		AF6475212950FD180001C2C5 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6475202950FD180001C2C5 /* UIColor+Extensions.swift */; };
 		AF6F6577294F5B140072C79E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F6576294F5B140072C79E /* AppDelegate.swift */; };
 		AF6F6579294F5B140072C79E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F6578294F5B140072C79E /* SceneDelegate.swift */; };
@@ -18,13 +16,16 @@
 		AF6F657E294F5B140072C79E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6F657C294F5B140072C79E /* Main.storyboard */; };
 		AF6F6580294F5B160072C79E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6F657F294F5B160072C79E /* Assets.xcassets */; };
 		AF6F6583294F5B160072C79E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6F6581294F5B160072C79E /* LaunchScreen.storyboard */; };
+		AF79CC822974824500F9A98C /* UIFont+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF79CC812974824500F9A98C /* UIFont+Extentions.swift */; };
+		AF7E48CC297EB353009149BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7E48CB297EB353009149BC /* Constants.swift */; };
+		AFC2CDBD2966EF70005FCC14 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2CDBC2966EF70005FCC14 /* ProfileViewController.swift */; };
+		AFC2CDC3296DBD5F005FCC14 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2CDC2296DBD5F005FCC14 /* ImageViewController.swift */; };
+		AFC42522297850DD004D98C0 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFC42521297850DD004D98C0 /* SF-Pro.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AF6475142950802A0001C2C5 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		AF6475162950F1A50001C2C5 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		AF64751B2950FBEC0001C2C5 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
-		AF64751C2950FBEC0001C2C5 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 		AF6475202950FD180001C2C5 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		AF6F6573294F5B140072C79E /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6F6576294F5B140072C79E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +35,11 @@
 		AF6F657F294F5B160072C79E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF6F6582294F5B160072C79E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF6F6584294F5B160072C79E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF79CC812974824500F9A98C /* UIFont+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extentions.swift"; sourceTree = "<group>"; };
+		AF7E48CB297EB353009149BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AFC2CDBC2966EF70005FCC14 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AFC2CDC2296DBD5F005FCC14 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		AFC42521297850DD004D98C0 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,13 +53,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AF64751329506F5A0001C2C5 /* ImagesListCell */ = {
+		AF64751329506F5A0001C2C5 /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
 				AF6F657A294F5B140072C79E /* ImagesListViewController.swift */,
 				AF6475142950802A0001C2C5 /* ImagesListCell.swift */,
 			);
-			path = ImagesListCell;
+			path = ImagesList;
 			sourceTree = "<group>";
 		};
 		AF6475182950F1AE0001C2C5 /* Helpers */ = {
@@ -61,6 +67,8 @@
 			children = (
 				AF6475162950F1A50001C2C5 /* Date+Extensions.swift */,
 				AF6475202950FD180001C2C5 /* UIColor+Extensions.swift */,
+				AF79CC812974824500F9A98C /* UIFont+Extentions.swift */,
+				AF7E48CB297EB353009149BC /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -74,20 +82,19 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
-		AF64751A2950FBEC0001C2C5 /* MovieQuizFonts */ = {
+		AF64751A2950FBEC0001C2C5 /* ImageFeedFonts */ = {
 			isa = PBXGroup;
 			children = (
-				AF64751B2950FBEC0001C2C5 /* YS Display-Bold.ttf */,
-				AF64751C2950FBEC0001C2C5 /* YS Display-Medium.ttf */,
+				AFC42521297850DD004D98C0 /* SF-Pro.ttf */,
 			);
-			path = MovieQuizFonts;
+			path = ImageFeedFonts;
 			sourceTree = "<group>";
 		};
 		AF64751F2950FBF70001C2C5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				AF6F657F294F5B160072C79E /* Assets.xcassets */,
-				AF64751A2950FBEC0001C2C5 /* MovieQuizFonts */,
+				AF64751A2950FBEC0001C2C5 /* ImageFeedFonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -112,7 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				AF6475192950F1BE0001C2C5 /* Delegate */,
-				AF64751329506F5A0001C2C5 /* ImagesListCell */,
+				AF64751329506F5A0001C2C5 /* ImagesList */,
+				AFC2CDC1296700DF005FCC14 /* SingleImage */,
+				AFC2CDBE2966EF75005FCC14 /* Profile */,
 				AF6475182950F1AE0001C2C5 /* Helpers */,
 				AF64751F2950FBF70001C2C5 /* Resources */,
 				AF6F657C294F5B140072C79E /* Main.storyboard */,
@@ -120,6 +129,22 @@
 				AF6F6584294F5B160072C79E /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		AFC2CDBE2966EF75005FCC14 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AFC2CDBC2966EF70005FCC14 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		AFC2CDC1296700DF005FCC14 /* SingleImage */ = {
+			isa = PBXGroup;
+			children = (
+				AFC2CDC2296DBD5F005FCC14 /* ImageViewController.swift */,
+			);
+			path = SingleImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,10 +206,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF6F6583294F5B160072C79E /* LaunchScreen.storyboard in Resources */,
+				AFC42522297850DD004D98C0 /* SF-Pro.ttf in Resources */,
 				AF6F6580294F5B160072C79E /* Assets.xcassets in Resources */,
 				AF6F657E294F5B140072C79E /* Main.storyboard in Resources */,
-				AF64751D2950FBED0001C2C5 /* YS Display-Bold.ttf in Resources */,
-				AF64751E2950FBED0001C2C5 /* YS Display-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,11 +220,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF6F657B294F5B140072C79E /* ImagesListViewController.swift in Sources */,
+				AF7E48CC297EB353009149BC /* Constants.swift in Sources */,
+				AFC2CDC3296DBD5F005FCC14 /* ImageViewController.swift in Sources */,
 				AF6475212950FD180001C2C5 /* UIColor+Extensions.swift in Sources */,
 				AF6475152950802A0001C2C5 /* ImagesListCell.swift in Sources */,
 				AF6F6577294F5B140072C79E /* AppDelegate.swift in Sources */,
+				AFC2CDBD2966EF70005FCC14 /* ProfileViewController.swift in Sources */,
 				AF6475172950F1A60001C2C5 /* Date+Extensions.swift in Sources */,
 				AF6F6579294F5B140072C79E /* SceneDelegate.swift in Sources */,
+				AF79CC822974824500F9A98C /* UIFont+Extentions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y47Y5YN8TD;
@@ -364,6 +393,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Savhouse.ImageFeed;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -378,6 +408,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y47Y5YN8TD;
@@ -395,6 +426,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Savhouse.ImageFeed;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
