@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ImageViewController: UIViewController {
+final class ImageViewController: UIViewController {
     
     // MARK: UIElemets
     private var backButton: UIButton = {
@@ -55,6 +55,9 @@ class ImageViewController: UIViewController {
         rescaleAndCenterImageInScrollView(image: image)
     }
     
+    override func viewDidLayoutSubviews() {
+        rescaleAndCenterImageInScrollView(image: image)
+    }
     // MARK:  action button
     @objc
     private func didTapBackButton() {

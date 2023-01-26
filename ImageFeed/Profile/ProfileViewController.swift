@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     // MARK: Private property
     private var nameLable: UILabel?
@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK:  action button
-    @objc func didTapLogoutButton() {
+    @objc private func didTapLogoutButton() {
         //LogOUT
     }
 }

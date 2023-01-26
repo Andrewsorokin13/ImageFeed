@@ -17,4 +17,10 @@ struct Constants {
         static let activeLikeButtonImage = "active"
         static let noActiveLikeButtonImage  = "noActive"
     }
+    
+    struct UnsplashAPI {
+        static let accessKey = "wOxFRUzch7zue7IbCjOTpvZUEdrcvxSMGIKChG3bLGc"
+        static let secretKey = "aVizbi_3xSwj0DB6jK0ntUu7CBpwDTXKN6Whatlzlio"
+        static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
+    }
 }
