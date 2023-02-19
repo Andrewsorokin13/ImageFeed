@@ -5,19 +5,20 @@ final class ImageViewController: UIViewController {
     
     // MARK: UIElemets
     private var backButton: UIButton = {
-        let button = UIButton.systemButton(with: UIImage(named: Constants.ImageButton.backButtonImage)!,
-                                           target: self,
-                                           action: #selector(didTapBackButton))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+        UIButton.customButton(
+            image: UIImage(named: Constants.ImageButton.backButtonImage) ?? UIImage(),
+            target: self,
+            action:  #selector(didTapBackButton),
+            tinColor: .YPWhite
+        )
     }()
     
     private var sharedButton: UIButton = {
-        let button = UIButton.systemButton(with: UIImage(named: Constants.ImageButton.shareButtonImage)!,
-                                           target: self,
-                                           action: #selector(didTapShareButton))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+        UIButton.customButton(
+            image: UIImage(named: Constants.ImageButton.shareButtonImage) ?? UIImage(),
+            target: self,
+            action: #selector(didTapShareButton),
+            tinColor: .clear)
     }()
     
     private  var scrollView: UIScrollView = {
@@ -30,9 +31,7 @@ final class ImageViewController: UIViewController {
     }()
     
     private  var imageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+       UIImageView()
     }()
     
     
@@ -45,6 +44,7 @@ final class ImageViewController: UIViewController {
         }
     }
     
+    // MARK: override func
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
@@ -58,23 +58,35 @@ final class ImageViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         rescaleAndCenterImageInScrollView(image: image)
     }
+    
     // MARK:  action button
     @objc
     private func didTapBackButton() {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc
-    private func didTapShareButton() {
-        let share = UIActivityViewController(
-            activityItems: [image],
-            applicationActivities: nil
-        )
+    // MARK:  action button
+    @objc private func didTapShareButton() {
+        let share = sharedActivity()
         present(share, animated: true, completion: nil)
     }
     
-    // MARK:  Setup Constraint view
-    func setupConstraintView() {
+    private  func setContentSize() {
+        scrollView.minimumZoomScale = 0.1
+        scrollView.maximumZoomScale = 1.25
+    }
+    
+    private func sharedActivity() -> UIActivityViewController {
+        UIActivityViewController(
+            activityItems: [image],
+            applicationActivities: nil
+        )
+    }
+}
+
+// MARK:  Setup Constraint view
+extension ImageViewController {
+   private  func setupConstraintView() {
         // Add subView
         view.addSubview(scrollView)
         view.addSubview(backButton)
@@ -95,6 +107,7 @@ final class ImageViewController: UIViewController {
         sharedButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -38).isActive = true
         
         //Image View
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -105,11 +118,6 @@ final class ImageViewController: UIViewController {
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-    
-    private  func setContentSize() {
-        scrollView.minimumZoomScale = 0.1
-        scrollView.maximumZoomScale = 1.25
     }
 }
 
