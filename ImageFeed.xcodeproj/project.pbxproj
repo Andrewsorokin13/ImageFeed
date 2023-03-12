@@ -27,6 +27,13 @@
 		AF6F6583294F5B160072C79E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6F6581294F5B160072C79E /* LaunchScreen.storyboard */; };
 		AF79CC822974824500F9A98C /* UIFont+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF79CC812974824500F9A98C /* UIFont+Extentions.swift */; };
 		AF7E48CC297EB353009149BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7E48CB297EB353009149BC /* Constants.swift */; };
+		AFA8F93629AD05DC00B413A6 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8F93529AD05DC00B413A6 /* UIBlockingProgressHUD.swift */; };
+		AFA8F93829AFA29A00B413A6 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8F93729AFA29A00B413A6 /* ProfileImageService.swift */; };
+		AFA8F93A29AFA2BE00B413A6 /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8F93929AFA2BE00B413A6 /* UserResult.swift */; };
+		AFA8F94029B4172800B413A6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AFA8F93F29B4172800B413A6 /* Kingfisher */; };
+		AFA8F94329B493DB00B413A6 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = AFA8F94229B493DB00B413A6 /* SwiftKeychainWrapper */; };
+		AFA8F94529B496A200B413A6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8F94429B496A200B413A6 /* TabBarController.swift */; };
+		AFB3BCB129B96949008672CE /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB3BCB029B96949008672CE /* AlertController.swift */; };
 		AFC2CDBD2966EF70005FCC14 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2CDBC2966EF70005FCC14 /* ProfileViewController.swift */; };
 		AFC2CDC3296DBD5F005FCC14 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2CDC2296DBD5F005FCC14 /* ImageViewController.swift */; };
 		AFC42522297850DD004D98C0 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFC42521297850DD004D98C0 /* SF-Pro.ttf */; };
@@ -38,6 +45,10 @@
 		AFE784DC29A2ABDA00AE2BB2 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE784DB29A2ABDA00AE2BB2 /* URLRequest+Extensions.swift */; };
 		AFE784DE29A2AC3D00AE2BB2 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE784DD29A2AC3D00AE2BB2 /* URLSession+Extensions.swift */; };
 		AFE784E329A2ACB200AE2BB2 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE784E229A2ACB200AE2BB2 /* NetworkError.swift */; };
+		AFE784E629A9045B00AE2BB2 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = AFE784E529A9045B00AE2BB2 /* ProgressHUD */; };
+		AFE784E829AB54A100AE2BB2 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE784E729AB54A100AE2BB2 /* ProfileService.swift */; };
+		AFE784EA29AB54E900AE2BB2 /* ProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE784E929AB54E900AE2BB2 /* ProfileResult.swift */; };
+		AFE784EC29AB550600AE2BB2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE784EB29AB550600AE2BB2 /* Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +74,11 @@
 		AF6F6584294F5B160072C79E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF79CC812974824500F9A98C /* UIFont+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extentions.swift"; sourceTree = "<group>"; };
 		AF7E48CB297EB353009149BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AFA8F93529AD05DC00B413A6 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
+		AFA8F93729AFA29A00B413A6 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
+		AFA8F93929AFA2BE00B413A6 /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
+		AFA8F94429B496A200B413A6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		AFB3BCB029B96949008672CE /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		AFC2CDBC2966EF70005FCC14 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AFC2CDC2296DBD5F005FCC14 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		AFC42521297850DD004D98C0 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
@@ -74,6 +90,9 @@
 		AFE784DB29A2ABDA00AE2BB2 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
 		AFE784DD29A2AC3D00AE2BB2 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		AFE784E229A2ACB200AE2BB2 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		AFE784E729AB54A100AE2BB2 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		AFE784E929AB54E900AE2BB2 /* ProfileResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResult.swift; sourceTree = "<group>"; };
+		AFE784EB29AB550600AE2BB2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +100,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA8F94029B4172800B413A6 /* Kingfisher in Frameworks */,
+				AFE784E629A9045B00AE2BB2 /* ProgressHUD in Frameworks */,
+				AFA8F94329B493DB00B413A6 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +135,8 @@
 				AF433BCF298C695C00048390 /* WebViewViewController */,
 				AF433BCD298C5D9600048390 /* AuthViewController */,
 				AF433BCC298C5D7E00048390 /* SplashViewController */,
+				AFA8F94429B496A200B413A6 /* TabBarController.swift */,
+				AFB3BCB029B96949008672CE /* AlertController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -140,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				AF433BD429919DBA00048390 /* OAuth2 */,
+				AFA8F93D29B33DA800B413A6 /* ProfileService */,
+				AFA8F93529AD05DC00B413A6 /* UIBlockingProgressHUD.swift */,
 			);
 			path = ServiceAccessLayer;
 			sourceTree = "<group>";
@@ -148,6 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				AF433BDA2991A56500048390 /* OAuthTokenResponseBody.swift */,
+				AFE784E929AB54E900AE2BB2 /* ProfileResult.swift */,
+				AFE784EB29AB550600AE2BB2 /* Profile.swift */,
+				AFA8F93929AFA2BE00B413A6 /* UserResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,6 +260,15 @@
 			path = ImageFeed;
 			sourceTree = "<group>";
 		};
+		AFA8F93D29B33DA800B413A6 /* ProfileService */ = {
+			isa = PBXGroup;
+			children = (
+				AFE784E729AB54A100AE2BB2 /* ProfileService.swift */,
+				AFA8F93729AFA29A00B413A6 /* ProfileImageService.swift */,
+			);
+			path = ProfileService;
+			sourceTree = "<group>";
+		};
 		AFC2CDBE2966EF75005FCC14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +316,11 @@
 			dependencies = (
 			);
 			name = ImageFeed;
+			packageProductDependencies = (
+				AFE784E529A9045B00AE2BB2 /* ProgressHUD */,
+				AFA8F93F29B4172800B413A6 /* Kingfisher */,
+				AFA8F94229B493DB00B413A6 /* SwiftKeychainWrapper */,
+			);
 			productName = ImageFeed;
 			productReference = AF6F6573294F5B140072C79E /* ImageFeed.app */;
 			productType = "com.apple.product-type.application";
@@ -306,6 +349,11 @@
 				Base,
 			);
 			mainGroup = AF6F656A294F5B140072C79E;
+			packageReferences = (
+				AFE784E429A9045B00AE2BB2 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+				AFA8F93E29B4172800B413A6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				AFA8F94129B493DB00B413A6 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+			);
 			productRefGroup = AF6F6574294F5B140072C79E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -335,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF6F657B294F5B140072C79E /* ImagesListViewController.swift in Sources */,
+				AFE784EC29AB550600AE2BB2 /* Profile.swift in Sources */,
 				AF433BD729919FD800048390 /* OAuth2TokenStorage.swift in Sources */,
 				AFE784D629A2A8D600AE2BB2 /* WebViewViewController+ WKNavigationDelegate.swift in Sources */,
 				AF433BBF298C4B0200048390 /* UILable+Extentions.swift in Sources */,
@@ -344,10 +393,14 @@
 				AFE784DE29A2AC3D00AE2BB2 /* URLSession+Extensions.swift in Sources */,
 				AFC2CDC3296DBD5F005FCC14 /* ImageViewController.swift in Sources */,
 				AF433BC1298C4C6C00048390 /* UIImage+Extentions.swift in Sources */,
+				AFB3BCB129B96949008672CE /* AlertController.swift in Sources */,
+				AFA8F93A29AFA2BE00B413A6 /* UserResult.swift in Sources */,
 				AFE784DC29A2ABDA00AE2BB2 /* URLRequest+Extensions.swift in Sources */,
 				AFE784D829A2A97900AE2BB2 /* WebViewViewController+URLRequest.swift in Sources */,
 				AFE784D429A2A84300AE2BB2 /* WebViewViewControllerDelegate.swift in Sources */,
+				AFE784E829AB54A100AE2BB2 /* ProfileService.swift in Sources */,
 				AF433BC7298C5D2000048390 /* SplashViewController.swift in Sources */,
+				AFA8F94529B496A200B413A6 /* TabBarController.swift in Sources */,
 				AF6475212950FD180001C2C5 /* UIColor+Extensions.swift in Sources */,
 				AF433BC9298C5D5000048390 /* AuthViewController.swift in Sources */,
 				AF6475152950802A0001C2C5 /* ImagesListCell.swift in Sources */,
@@ -357,10 +410,13 @@
 				AF6475172950F1A60001C2C5 /* Date+Extensions.swift in Sources */,
 				AF433BC3298C505600048390 /* UIButton+Extentions.swift in Sources */,
 				AF433BDB2991A56500048390 /* OAuthTokenResponseBody.swift in Sources */,
+				AFA8F93829AFA29A00B413A6 /* ProfileImageService.swift in Sources */,
 				AF6F6579294F5B140072C79E /* SceneDelegate.swift in Sources */,
+				AFE784EA29AB54E900AE2BB2 /* ProfileResult.swift in Sources */,
 				AF433BCB298C5D5F00048390 /* WebViewViewController.swift in Sources */,
 				AFE784D029A2A74100AE2BB2 /* AuthViewControllerDelegate.swift in Sources */,
 				AF79CC822974824500F9A98C /* UIFont+Extentions.swift in Sources */,
+				AFA8F93629AD05DC00B413A6 /* UIBlockingProgressHUD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,8 +570,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImageFeed/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -547,8 +604,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImageFeed/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -590,6 +648,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AFA8F93E29B4172800B413A6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		AFA8F94129B493DB00B413A6 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		AFE784E429A9045B00AE2BB2 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
+			requirement = {
+				kind = exactVersion;
+				version = 13.6.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AFA8F93F29B4172800B413A6 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFA8F93E29B4172800B413A6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		AFA8F94229B493DB00B413A6 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFA8F94129B493DB00B413A6 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+		AFE784E529A9045B00AE2BB2 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFE784E429A9045B00AE2BB2 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF6F656B294F5B140072C79E /* Project object */;
 }
