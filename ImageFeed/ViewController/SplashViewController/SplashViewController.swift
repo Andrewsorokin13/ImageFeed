@@ -1,29 +1,58 @@
 import UIKit
 
+
 final class SplashViewController: UIViewController {
     
     //MARK: - private property
+    private let profileService = ProfileService.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
-    private  let oauth2Service = OAuth2Service()
+    private let oauth2Service = OAuth2Service()
     
-    //MARK: - Override method
+    private var test = ProfileImageService.shared
+    private var alertPresenter: AlertPresenter?
+   
+    private lazy var imageLogo: UIImageView  = {
+        UIImageView.customImageView(
+            name: "LogoLaunchScreen",
+            cornerRadius: 0
+        )
+    }()
+   
+    // MARK: - Override methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.verificationToken()
-        }
+        self.verificationToken()
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        alertPresenter = AlertPresenter(viewController: self)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
+        setConstraint()
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
     
-    //MARK: - Private method
+    //MARK: - Private methods
+    
+    private func setConstraint() {
+        view.backgroundColor = .YPBlack
+        view.addSubview(imageLogo)
+        
+        imageLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imageLogo.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        imageLogo.heightAnchor.constraint(equalToConstant: 77).isActive = true
+        imageLogo.widthAnchor.constraint(equalToConstant: 75).isActive = true
+    }
+    
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
@@ -32,17 +61,19 @@ final class SplashViewController: UIViewController {
     }
     
     private func verificationToken() {
-        if oauth2TokenStorage.token != nil {
-            switchToTabBarController()
-        } else {
-            showAuthViewController()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
+            if oauth2TokenStorage.token != nil {
+                switchToTabBarController()
+                guard let token = oauth2TokenStorage.token else { return  }
+                fetchProfile(token: token)
+            } else {
+                showAuthViewController()
+            }
         }
     }
     
     private func showAuthViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let authVC = storyboard.instantiateViewController(identifier: "AuthViewController") as? AuthViewController
-        guard let authVC = authVC else { fatalError("Error loading AuthViewController") }
+        let authVC = AuthViewController()
         authVC.delegate = self
         authVC.modalPresentationStyle = .fullScreen
         show(authVC, sender: self)
@@ -54,6 +85,7 @@ extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
+            UIBlockingProgressHUD.show()
             self.fetchOAuthToken(code)
         }
     }
@@ -62,10 +94,27 @@ extension SplashViewController: AuthViewControllerDelegate {
         oauth2Service.fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success:
+            case .success (let token):
+                self.fetchProfile(token: token)
                 self.switchToTabBarController()
             case .failure(let error):
+                print("This error ",error)
+                UIBlockingProgressHUD.dismiss()
+            }
+        }
+    }
+    private func fetchProfile(token: String) {
+        profileService.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                UIBlockingProgressHUD.dismiss()
+                self.switchToTabBarController()
+            case .failure (let error):
                 print(error)
+                UIBlockingProgressHUD.dismiss()
+                self.alertPresenter?.creationAlert(title: "Что-то пошло не так", messange: "Не удалось войти в систему", completion: nil)
+                break
             }
         }
     }
