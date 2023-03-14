@@ -53,7 +53,7 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setConstraint()
         
-        profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.DidChangeNotification, object: nil, queue: .main, using: { [weak self] _ in
+        profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main, using: { [weak self] _ in
             guard let self = self else { return  }
             self.updateAvatar()
         })
@@ -86,6 +86,7 @@ final class ProfileViewController: UIViewController {
 //MARK: - Set constraint UI elements
 private extension ProfileViewController {
     private func setConstraint() {
+        view.backgroundColor = .YPBlack
         
         // Avatar ImageView
         view.addSubview(avatarImageView)

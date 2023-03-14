@@ -51,7 +51,7 @@ final class ProfileService {
     }
     
     private func convertToProfile(profileResult: ProfileResult) -> Profile {
-        return Profile(username: profileResult.username, name: profileResult.firstName, loginName: profileResult.id, bio: profileResult.bio ?? "No bio")
+        return Profile(username: profileResult.username, name: profileResult.firstName, loginName: profileResult.username, bio: profileResult.bio ?? "No bio")
     }
     
     private func object(for request: URLRequest, completion: @escaping (Result<ProfileResult, Error>) -> Void) -> URLSessionDataTask {

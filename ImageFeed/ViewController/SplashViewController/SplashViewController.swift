@@ -10,14 +10,14 @@ final class SplashViewController: UIViewController {
     
     private var test = ProfileImageService.shared
     private var alertPresenter: AlertPresenter?
-   
+    
     private lazy var imageLogo: UIImageView  = {
         UIImageView.customImageView(
             name: "LogoLaunchScreen",
             cornerRadius: 0
         )
     }()
-   
+    
     // MARK: - Override methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -49,8 +49,8 @@ final class SplashViewController: UIViewController {
         
         imageLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         imageLogo.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        imageLogo.heightAnchor.constraint(equalToConstant: 77).isActive = true
-        imageLogo.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        imageLogo.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        imageLogo.widthAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
     private func switchToTabBarController() {
@@ -61,19 +61,19 @@ final class SplashViewController: UIViewController {
     }
     
     private func verificationToken() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
-            if oauth2TokenStorage.token != nil {
-                switchToTabBarController()
-                guard let token = oauth2TokenStorage.token else { return  }
-                fetchProfile(token: token)
-            } else {
-                showAuthViewController()
-            }
+        if let token = oauth2TokenStorage.token {
+            switchToTabBarController()
+            fetchProfile(token: token)
+        } else {
+            showAuthViewController()
         }
+        
     }
     
     private func showAuthViewController() {
-        let authVC = AuthViewController()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let authVC = storyboard.instantiateViewController(identifier: "AuthViewController") as? AuthViewController
+        guard let authVC = authVC else { fatalError("Error loading WebViewViewController") }
         authVC.delegate = self
         authVC.modalPresentationStyle = .fullScreen
         show(authVC, sender: self)

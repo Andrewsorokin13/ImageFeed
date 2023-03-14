@@ -13,7 +13,7 @@ final class ProfileImageService {
     private (set) var avatarURL: String?
     
     //MARK: - Private property
-    static let DidChangeNotification = Notification.Name("ProfileImageProviderDidChange")
+    static let didChangeNotification = Notification.Name("ProfileImageProviderDidChange")
     static let shared = ProfileImageService()
     
     //MARK: - Public method
@@ -31,13 +31,14 @@ final class ProfileImageService {
                 if let result = self.avatarURL  {
                     completion(.success(result))
                 } else {
+                    //completion(.failure(error))
                     print("Error load profile image")
                 }
             case .failure(let error):
                 completion(.failure(error))
             }
         }
-        NotificationCenter.default.post(name: ProfileImageService.DidChangeNotification, object: self, userInfo: ["URL": avatarURL])
+        NotificationCenter.default.post(name: ProfileImageService.didChangeNotification, object: self, userInfo: ["URL": avatarURL])
     }
     
     //MARK: - Private method
