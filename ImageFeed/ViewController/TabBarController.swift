@@ -3,6 +3,9 @@ import UIKit
 final class TabBarController: UITabBarController {
     
     // MARK: - Override methods
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override  func awakeFromNib() {
         super.awakeFromNib()

@@ -4,16 +4,16 @@ import SwiftKeychainWrapper
 final class OAuth2TokenStorage  {
     //MARK: - Private property
     private let keychainWrapper = KeychainWrapper.standard
-    private let codekey = "code"
+    private let codeKey = "code"
     
     //MARK: - Calculate  property
     var token: String? {
         get {
-            keychainWrapper.string(forKey: codekey )
+            keychainWrapper.string(forKey: codeKey )
         }
         set {
             guard let newValue = newValue else { return  }
-            keychainWrapper.set(newValue, forKey: codekey)
+            keychainWrapper.set(newValue, forKey: codeKey)
         }
     }
 }

@@ -53,6 +53,10 @@ final class WebViewViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     //MARK: - Action button
     @objc private func didTapBackButton() {
         dismiss(animated: true, completion: nil)

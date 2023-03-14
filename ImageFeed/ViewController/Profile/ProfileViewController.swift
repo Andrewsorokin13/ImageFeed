@@ -48,7 +48,7 @@ final class ProfileViewController: UIViewController {
     }()
     
     // MARK: - Override methods
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
@@ -61,6 +61,10 @@ final class ProfileViewController: UIViewController {
         
         guard let profile = profileService.profile else { return  }
         updateProfileDetails(profile: profile)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
    
     // MARK: - Private methods
