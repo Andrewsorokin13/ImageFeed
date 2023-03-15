@@ -2,7 +2,7 @@ import UIKit
 import WebKit
 
 final class WebViewViewController: UIViewController {
-    
+
     //MARK: - UI Elemets
     private lazy var webView: WKWebView = {
         WKWebView()
@@ -24,7 +24,7 @@ final class WebViewViewController: UIViewController {
     //MARK: - Public property
     weak var delegate: WebViewViewControllerDelegate?
     
-    //MARK: - Override func
+    // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupConstraint()
@@ -51,6 +51,10 @@ final class WebViewViewController: UIViewController {
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     //MARK: - Action button

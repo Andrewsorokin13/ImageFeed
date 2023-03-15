@@ -1,13 +1,18 @@
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
     // MARK: Private property
+    private var profileImageServiceObserver: NSObjectProtocol?
+    private let profileService = ProfileService.shared
+    
+    // MARK: UIElemets property
     private lazy var nameLable: UILabel = {
         UILabel.customLable(
             textColor: .white,
             font: UIFont.sfProBold23,
-            text: "Andrew Sorokin"
+            text: "bio"
         )
     }()
     
@@ -15,7 +20,7 @@ final class ProfileViewController: UIViewController {
         UILabel.customLable(
             textColor: .loginLableColor ,
             font: UIFont.sfProRegular13,
-            text: "@andrew13"
+            text:  "bio"
         )
     }()
     
@@ -23,7 +28,7 @@ final class ProfileViewController: UIViewController {
         UILabel.customLable(
             textColor: .white,
             font: UIFont.sfProRegular13,
-            text: "Hello world"
+            text: "bio"
         )
     }()
     
@@ -42,10 +47,38 @@ final class ProfileViewController: UIViewController {
         )
     }()
     
-    // MARK: viewDidLoad
+    // MARK: - Override methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
+        
+        profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main, using: { [weak self] _ in
+            guard let self = self else { return  }
+            self.updateAvatar()
+        })
+        updateAvatar()
+        
+        guard let profile = profileService.profile else { return  }
+        updateProfileDetails(profile: profile)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+   
+    // MARK: - Private methods
+    private func updateAvatar() {
+        guard let profileImageURL = ProfileImageService.shared.avatarURL,
+              let url = URL(string: profileImageURL)
+        else { return  }
+        avatarImageView.kf.setImage(with: url)
+    }
+    
+    private func updateProfileDetails(profile: Profile) {
+        nameLable.text = profile.name
+        loginNameLabel.text = ("@\(profile.loginName)")
+        descriptionLable.text = profile.bio
     }
     
     // MARK:  action button
@@ -57,6 +90,7 @@ final class ProfileViewController: UIViewController {
 //MARK: - Set constraint UI elements
 private extension ProfileViewController {
     private func setConstraint() {
+        view.backgroundColor = .YPBlack
         
         // Avatar ImageView
         view.addSubview(avatarImageView)

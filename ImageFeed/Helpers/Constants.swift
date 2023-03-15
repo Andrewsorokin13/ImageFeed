@@ -9,6 +9,8 @@ struct Constants {
         static let segueGoToImageViewController = "goToImageViewController"
         static let imageCellReuseIdentifier = "ImagesListCell"
         static let segueGoToWebViewController = "ShowWebView"
+        static let imagesListViewController = "ImagesListViewController"
+        static let profileViewController = "ProfileViewController"
     }
     
     struct ImageButton {
@@ -17,6 +19,11 @@ struct Constants {
         static let logOutProfileImage = "ipad.and.arrow.forward"
         static let activeLikeButtonImage = "active"
         static let noActiveLikeButtonImage  = "noActive"
+    }
+    
+    struct BarButtonImage {
+        static let profileBarButtonImage = "tab_profile_active"
+        static let imagelistBarButtonImage = "tab_editorial_active"
     }
     
     struct UnsplashAPI {
@@ -29,3 +36,4 @@ struct Constants {
         static let authpath = "oauth/authorize/native"
     }
 }
+

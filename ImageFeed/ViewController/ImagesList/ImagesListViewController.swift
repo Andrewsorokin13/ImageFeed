@@ -27,6 +27,10 @@ final class ImagesListViewController: UIViewController {
             super.prepare(for: segue, sender: sender)
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 //MARK: Configuration cell to ImagesListViewController
@@ -35,6 +39,7 @@ extension ImagesListViewController {
         guard let image = UIImage(named: photosName[indexPath.row]) else { return }
         cell.imageCell.image = image
         cell.dateLable.text = Date().dateTimeString
+        cell.selectionStyle = .none
         let likeImage = setImageLikeButton(with: indexPath)
         cell.likeButton.setImage(likeImage, for: .normal)
     }
