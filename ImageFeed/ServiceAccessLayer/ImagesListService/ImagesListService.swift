@@ -47,7 +47,6 @@ final class ImagesListService {
             request = isLikedRequest(id: photoId, token: token, httpMethod: "POST")
         }
         guard let request = request else { return  }
-        print(request)
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<Like, Error>) in
             guard let self = self else { return  }
             self.task = nil
@@ -69,6 +68,7 @@ final class ImagesListService {
             }
         }
         self.task = task
+        task.resume()
     }
     
     //MARK: - Private method
