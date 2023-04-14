@@ -37,7 +37,7 @@ final class ImagesListService {
         }
     }
     
-    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void) {
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         var request: URLRequest?
         assert(Thread.isMainThread)
         task?.cancel()
@@ -47,26 +47,33 @@ final class ImagesListService {
             request = isLikedRequest(id: photoId, token: token, httpMethod: "POST")
         }
         guard let request = request else { return  }
-        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<Like, Error>) in
-            guard let self = self else { return  }
-            self.task = nil
-            switch result {
-            case .success:
-                guard let index = self.photos.firstIndex(where: {$0.id == photoId}) else { return  }
-                let photo = self.photos[index]
-                let updatePhoto = Photo(id: photo.id,
-                                        size: photo.size,
-                                        createdAt: photo.createdAt,
-                                        welcomeDescription: photo.welcomeDescription,
-                                        thumbImageURL: photo.thumbImageURL,
-                                        largeImageURL: photo.largeImageURL,
-                                        isLiked: !photo.isLiked)
-                self.photos[index] = updatePhoto
-                completion(.success(self.photos[index]))
-            case .failure(let failure):
-                print(failure)
+        let task = urlSession.dataTask(with: request, completionHandler: { data, response, error in
+            if let data = data,
+               let response = response,
+               let statusCode = (response as? HTTPURLResponse)?.statusCode
+            {
+                if 200 ..< 300 ~= statusCode {
+                    print(statusCode)
+                    guard let index = self.photos.firstIndex(where: {$0.id == photoId}) else { return  }
+                    let photo = self.photos[index]
+                    let updatePhoto = Photo(id: photo.id,
+                                            size: photo.size,
+                                            createdAt: photo.createdAt,
+                                            welcomeDescription: photo.welcomeDescription,
+                                            thumbImageURL: photo.thumbImageURL,
+                                            largeImageURL: photo.largeImageURL,
+                                            isLiked: !photo.isLiked)
+                    self.photos[index] = updatePhoto
+                    completion(.success(()))
+                } else {
+                    completion(.failure(error!))
+                }
+            } else if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.failure(error!))
             }
-        }
+        })
         self.task = task
         task.resume()
     }

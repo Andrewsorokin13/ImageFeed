@@ -8,9 +8,11 @@ final class ImagesListViewController: UIViewController {
     private let imageListService = ImagesListService.shared
     private var imageListServiceObserver: NSObjectProtocol?
     private var alertPresenter: AlertPresenter?
+    
     // MARK: private IBOutlet
     @IBOutlet private weak var tableView: UITableView!
     let dat =  ISO8601DateFormatter()
+    
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,9 +147,9 @@ extension ImagesListViewController: ImagesListCellDelegate {
             DispatchQueue.main.async {
                 switch result {
                 case .success :
-                        self.photos = self.imageListService.photos
-                        cell.setLiked(isLiked: self.photos[indexPath.row].isLiked)
-                        UIBlockingProgressHUD.dismiss()
+                    self.photos = self.imageListService.photos
+                    cell.setLiked(isLiked: self.photos[indexPath.row].isLiked)
+                    UIBlockingProgressHUD.dismiss()
                 case .failure:
                     UIBlockingProgressHUD.dismiss()
                     self.alertPresenter?.creationAlert(title: "Что-то пошло не так", messange: "Не удалось войти в систему", completion: nil)
