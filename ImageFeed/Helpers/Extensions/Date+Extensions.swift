@@ -3,7 +3,7 @@ import Foundation
 // MARK: Extension Date
 private let dateTimeDefaultFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .long
+    dateFormatter.dateStyle = .medium
     dateFormatter.timeStyle = .none
     return dateFormatter
 }()

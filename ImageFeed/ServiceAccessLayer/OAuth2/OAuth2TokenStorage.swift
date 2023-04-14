@@ -10,11 +10,18 @@ final class OAuth2TokenStorage  {
     var token: String? {
         get {
             keychainWrapper.string(forKey: codeKey )
+           
         }
         set {
             guard let newValue = newValue else { return  }
             keychainWrapper.set(newValue, forKey: codeKey)
         }
     }
+    
+    var deleteToken: Bool {
+        return  keychainWrapper.removeObject(forKey: codeKey)
+    }
+    
+    
 }
 

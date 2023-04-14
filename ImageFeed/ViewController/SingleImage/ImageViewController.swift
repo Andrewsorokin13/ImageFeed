@@ -1,7 +1,10 @@
 
 import UIKit
 
+
 final class ImageViewController: UIViewController {
+    
+    private var presenter: ImageViewPresenter!
     
     // MARK: UIElemets
     private var backButton: UIButton = {
@@ -21,38 +24,32 @@ final class ImageViewController: UIViewController {
             tinColor: .clear)
     }()
     
-    private  var scrollView: UIScrollView = {
+    private (set) var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceVertical = false
         scrollView.alwaysBounceHorizontal = false
-        scrollView.contentMode = .scaleToFill
+        scrollView.contentMode = .scaleAspectFit
         return scrollView
     }()
     
-    private  var imageView: UIImageView = {
-       UIImageView()
+    private var imageView: UIImageView = {
+        UIImageView()
     }()
     
-    
-    // MARK: public proprty
-    var image: UIImage! {
-        didSet {
-            guard isViewLoaded else { return }
-            imageView.image = image
-            rescaleAndCenterImageInScrollView(image: image)
-        }
-    }
+    var fullImageURL: URL!
     
     // MARK: override func
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter = ImageViewPresenter(vc: self)
         scrollView.delegate = self
         
         setupConstraintView()
         setContentSize()
-        imageView.image = image
-        rescaleAndCenterImageInScrollView(image: image)
+        
+        presenter.setImage(imageView: imageView)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -60,13 +57,14 @@ final class ImageViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        guard let image = imageView.image else { return }
         rescaleAndCenterImageInScrollView(image: image)
     }
     
     // MARK:  action button
     @objc
     private func didTapBackButton() {
-        dismiss(animated: true, completion: nil)
+        presenter.didTapBackButton()
     }
     
     // MARK:  action button
@@ -77,72 +75,62 @@ final class ImageViewController: UIViewController {
     
     private  func setContentSize() {
         scrollView.minimumZoomScale = 0.1
-        scrollView.maximumZoomScale = 1.25
+        scrollView.maximumZoomScale = 1.35
     }
     
     private func sharedActivity() -> UIActivityViewController {
         UIActivityViewController(
-            activityItems: [image],
+            activityItems: [imageView.image],
             applicationActivities: nil
         )
     }
 }
 
 // MARK:  Setup Constraint view
-extension ImageViewController {
-   private  func setupConstraintView() {
-        // Add subView
+private extension ImageViewController {
+    private  func setupConstraintView() {
+        //Scroll View
         view.addSubview(scrollView)
-        view.addSubview(backButton)
-        view.addSubview(sharedButton)
-        scrollView.addSubview(imageView)
         
         //Back Button
-        backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        view.addSubview(backButton)
         backButton.tintColor = .white
         
         //Share Button
-        sharedButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        sharedButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        sharedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        sharedButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -38).isActive = true
+        view.addSubview(sharedButton)
         
         //Image View
+        scrollView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        //Scroll View
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            backButton.heightAnchor.constraint(equalToConstant: 40),
+            backButton.widthAnchor.constraint(equalToConstant: 40),
+            
+            sharedButton.heightAnchor.constraint(equalToConstant: 50),
+            sharedButton.widthAnchor.constraint(equalToConstant: 50),
+            sharedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            sharedButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -38),
+            
+            imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 
 // MARK: rescale and center Image in ScrollView
 extension ImageViewController {
-
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
-        let minZoomScale = scrollView.minimumZoomScale
-        let maxZoomScale = scrollView.maximumZoomScale
-        view.layoutIfNeeded()
-        let visibleRectSize = scrollView.bounds.size
-        let imageSize = image.size
-        let hScale = visibleRectSize.width / imageSize.width
-        let vScale = visibleRectSize.height / imageSize.height
-        let scale = min(maxZoomScale, max(minZoomScale, max(hScale, vScale)))
-        scrollView.setZoomScale(scale, animated: false)
-        scrollView.layoutIfNeeded()
-        let newContentSize = scrollView.contentSize
-        let x = (newContentSize.width - visibleRectSize.width) / 2
-        let y = (newContentSize.height - visibleRectSize.height) / 2
-        scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
+        presenter.rescaleAndCenterImageInScrollView(image: image)
     }
 }
 

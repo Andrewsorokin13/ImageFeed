@@ -1,6 +1,6 @@
 import Foundation
 
-struct ProfileResult: Codable {
+struct ProfileResult: Decodable {
     let id: String
     let username: String
     let firstName: String

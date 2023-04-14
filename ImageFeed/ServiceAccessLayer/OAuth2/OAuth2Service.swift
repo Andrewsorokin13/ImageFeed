@@ -28,7 +28,7 @@ final class OAuth2Service {
         task?.cancel()
         lastCode = code
         guard let request = authTokenRequest(code: code) else { return  }
-        let task = object(for: request) { [weak self] result in
+        _ = object(for: request) { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
