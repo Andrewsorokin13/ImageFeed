@@ -11,7 +11,6 @@ final class ImagesListViewController: UIViewController {
     
     // MARK: private IBOutlet
     @IBOutlet private weak var tableView: UITableView!
-    let dat =  ISO8601DateFormatter()
     
     // MARK: viewDidLoad
     override func viewDidLoad() {
@@ -24,8 +23,7 @@ final class ImagesListViewController: UIViewController {
         imageListServiceObserver = NotificationCenter.default.addObserver(forName: ImagesListService.didChangeNotification,
                                                                           object: nil,
                                                                           queue: .main,
-                                                                          using: {
-            [weak self] _ in
+                                                                          using: { [weak self] _ in
             guard let self = self else { return  }
             self.updateTableViewAnimated()
         })
@@ -84,14 +82,9 @@ extension ImagesListViewController {
     
     // MARK: private func
     private func setImageLikeButton(with indexPath: IndexPath, isLiked: Bool) -> UIImage {
-        switch isLiked {
-        case true :
-            guard let image = UIImage(named: Constants.ImageButton.activeLikeButtonImage) else { return UIImage()}
-            return image
-        case false :
-            guard let image = UIImage(named: Constants.ImageButton.noActiveLikeButtonImage) else { return UIImage()}
-            return image
-        }
+        let image = isLiked ? UIImage(named: Constants.ImageButton.activeLikeButtonImage) : UIImage(named: Constants.ImageButton.noActiveLikeButtonImage)
+        guard let image = image else { return UIImage() }
+        return image
     }
 }
 
@@ -143,7 +136,8 @@ extension ImagesListViewController: ImagesListCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
         UIBlockingProgressHUD.show()
-        imageListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { result  in
+        imageListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self] result  in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success :

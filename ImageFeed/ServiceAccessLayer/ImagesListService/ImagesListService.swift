@@ -7,22 +7,28 @@ final class ImagesListService {
     private var lastLoadedPage: Int?
     private var task: URLSessionTask?
     
-    private let token = OAuth2TokenStorage().token
+    private let tokenStorage = OAuth2TokenStorage()
     private let urlSession = URLSession.shared
+    private  let formatter = ISO8601DateFormatter()
     
     //MARK: - Static property
     static let shared = ImagesListService()
     static let didChangeNotification = Notification.Name("ImagesListServiceDidChange")
     
+    
     //MARK: - Public method
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
         let nextPage = lastLoadedPage == nil ? 1 : lastLoadedPage! + 1
-        if nextPage == lastLoadedPage { return }
-        task?.cancel()
+        guard task == nil else { return }
+        if nextPage == lastLoadedPage {
+            task?.cancel()
+            return
+        }
         lastLoadedPage = nextPage
+        guard let token = tokenStorage.token else { return }
         guard let request = photoRequest(page: nextPage, perPage: 10, token: token) else { return }
-        _ = object(for: request) { [weak self] result in
+        let task = object(for: request) { [weak self] result in
             guard let self = self else { return  }
             switch result {
             case .success(let data):
@@ -30,22 +36,22 @@ final class ImagesListService {
                     let result = self.convertToPhoto(data: data)
                     self.photos.append(contentsOf: result)
                     NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self, userInfo: ["photos": result])
+                    self.task = nil
                 }
-            case .failure(let error):
-                print(error)
+            case .failure:
+                assertionFailure()
+                self.task = nil
             }
         }
+        self.task = task
     }
     
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         var request: URLRequest?
         assert(Thread.isMainThread)
-        task?.cancel()
-        if isLike {
-            request = isLikedRequest(id: photoId, token: token, httpMethod: "DELETE")
-        } else {
-            request = isLikedRequest(id: photoId, token: token, httpMethod: "POST")
-        }
+        guard task == nil else { return }
+        guard let token = tokenStorage.token else { return }
+        request = isLikedRequest(id: photoId, token: token, httpMethod: isLike ? "DELETE": "POST")
         guard let request = request else { return  }
         let task = urlSession.dataTask(with: request, completionHandler: { data, response, error in
             if let data = data,
@@ -53,18 +59,12 @@ final class ImagesListService {
                let statusCode = (response as? HTTPURLResponse)?.statusCode
             {
                 if 200 ..< 300 ~= statusCode {
-                    print(statusCode)
                     guard let index = self.photos.firstIndex(where: {$0.id == photoId}) else { return  }
-                    let photo = self.photos[index]
-                    let updatePhoto = Photo(id: photo.id,
-                                            size: photo.size,
-                                            createdAt: photo.createdAt,
-                                            welcomeDescription: photo.welcomeDescription,
-                                            thumbImageURL: photo.thumbImageURL,
-                                            largeImageURL: photo.largeImageURL,
-                                            isLiked: !photo.isLiked)
-                    self.photos[index] = updatePhoto
+                    var photo = self.photos[index]
+                    photo.isLiked.toggle()
+                    self.photos[index] = photo
                     completion(.success(()))
+                    self.task = nil
                 } else {
                     completion(.failure(error!))
                 }
@@ -92,7 +92,6 @@ final class ImagesListService {
     }
     
     private func convertToPhoto(data: [PhotoResult]) -> [Photo] {
-        let formatter = ISO8601DateFormatter()
         return  data.map { data in
             return Photo(
                 id: data.id,

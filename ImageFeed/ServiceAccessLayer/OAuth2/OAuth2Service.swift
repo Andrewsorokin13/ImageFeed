@@ -12,10 +12,10 @@ final class OAuth2Service {
     //MARK: - Private set property
     private (set) var authToken: String? {
         get {
-            return OAuth2TokenStorage().token
+            return oAuthStorage.token
         }
         set {
-            OAuth2TokenStorage().token = newValue
+            oAuthStorage.token = newValue
         } }
     
     //MARK: - Public property

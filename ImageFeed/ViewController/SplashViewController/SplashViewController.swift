@@ -16,7 +16,7 @@ final class SplashViewController: UIViewController {
     // MARK: - Override methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-            self.presenter.verificationToken()
+        self.presenter.verificateToken()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -36,14 +36,14 @@ final class SplashViewController: UIViewController {
     }
     
     // MARK: - public methods
-     func switchToTabBarController() {
+    func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
     
-     func showAuthViewController() {
+    func showAuthViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let authVC = storyboard.instantiateViewController(identifier: "AuthViewController") as? AuthViewController
         guard let authVC = authVC else { fatalError("Error loading WebViewViewController") }
@@ -56,9 +56,9 @@ final class SplashViewController: UIViewController {
 //MARK: - Conform AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
+        UIBlockingProgressHUD.show()
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
-            UIBlockingProgressHUD.show()
             self.presenter.fetchOAuthToken(code)
         }
     }

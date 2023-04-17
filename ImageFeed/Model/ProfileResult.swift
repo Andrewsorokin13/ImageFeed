@@ -8,8 +8,8 @@ struct ProfileResult: Decodable {
     let bio: String?
     
     enum CodingKeys: String, CodingKey {
-        case id  = "id"
-        case username = "username"
+        case id
+        case username
         case firstName = "first_name"
         case lastName = "last_name"
         case bio = "bio"

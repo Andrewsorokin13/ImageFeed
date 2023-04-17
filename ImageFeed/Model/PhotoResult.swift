@@ -10,9 +10,9 @@ struct PhotoResult: Codable {
     let url: UrlsResult
     
     enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case width = "width"
-        case height = "height"
+        case id
+        case width
+        case height
         case createdAt = "created_at"
         case description = "description"
         case usersLiked = "liked_by_user"

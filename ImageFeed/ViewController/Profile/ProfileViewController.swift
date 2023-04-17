@@ -6,7 +6,7 @@ final class ProfileViewController: UIViewController {
     // MARK: Private property
     private var profileImageServiceObserver: NSObjectProtocol?
     private var presenter: ProfilePresenter!
-  
+    
     // MARK: UIElemets property
     private lazy var nameLable: UILabel = {
         UILabel.customLable(
@@ -76,8 +76,27 @@ final class ProfileViewController: UIViewController {
     
     // MARK:  action button
     @objc private func didTapLogoutButton() {
-        presenter.logOut()
+        showOutAlert()
     }
+    
+}
+
+//MARK: - Show alert
+private extension ProfileViewController {
+    
+    private func showOutAlert() {
+        let alert = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert )
+        let alertYesAction = UIAlertAction(title: "Да", style: .default) {[weak self] _ in
+            guard let self = self else { return  }
+            self.presenter.logOut()
+        }
+        let alertNoAction = UIAlertAction(title: "Нет", style: .default)
+        
+        alert.addAction(alertYesAction)
+        alert.addAction(alertNoAction)
+        self.present(alert, animated: true)
+    }
+    
 }
 
 //MARK: - Set constraint UI elements
@@ -106,9 +125,9 @@ private extension ProfileViewController {
             avatarImageView.heightAnchor.constraint(equalToConstant: 70),
             avatarImageView.widthAnchor.constraint(equalToConstant: 70),
             avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 76),
+            avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: 32),
             
-            nameLable.heightAnchor.constraint(equalToConstant: 18),
+            
             nameLable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  18),
             nameLable.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
             nameLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 18),

@@ -18,8 +18,8 @@ final class ImageViewPresenter {
             switch result {
             case .success(let imageResult):
                 self.rescaleAndCenterImageInScrollView(image: imageResult.image)
-            case .failure (let error):
-                print(error)
+            case .failure:
+               assertionFailure()
             }
         }
     }
