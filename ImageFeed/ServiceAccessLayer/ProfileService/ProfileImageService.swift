@@ -31,7 +31,6 @@ final class ProfileImageService {
                 if let result = self.avatarURL  {
                     completion(.success(result))
                 } else {
-                    //completion(.failure(error))
                     print("Error load profile image")
                 }
             case .failure(let error):

@@ -1,11 +1,11 @@
 import UIKit
-import Kingfisher
+
 
 final class ProfileViewController: UIViewController {
     
     // MARK: Private property
     private var profileImageServiceObserver: NSObjectProtocol?
-    private let profileService = ProfileService.shared
+    private var presenter: ProfilePresenter!
     
     // MARK: UIElemets property
     private lazy var nameLable: UILabel = {
@@ -48,82 +48,100 @@ final class ProfileViewController: UIViewController {
     }()
     
     // MARK: - Override methods
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = ProfilePresenter(vc: self)
         setConstraint()
-        
         profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main, using: { [weak self] _ in
             guard let self = self else { return  }
             self.updateAvatar()
         })
         updateAvatar()
-        
-        guard let profile = profileService.profile else { return  }
-        updateProfileDetails(profile: profile)
+        updateProfileDetails()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-   
+    
     // MARK: - Private methods
     private func updateAvatar() {
-        guard let profileImageURL = ProfileImageService.shared.avatarURL,
-              let url = URL(string: profileImageURL)
-        else { return  }
-        avatarImageView.kf.setImage(with: url)
+        presenter.updateAvatar(avatarImageView: avatarImageView)
     }
     
-    private func updateProfileDetails(profile: Profile) {
-        nameLable.text = profile.name
-        loginNameLabel.text = ("@\(profile.loginName)")
-        descriptionLable.text = profile.bio
+    private func updateProfileDetails() {
+        presenter.updateProfileDetails(nameLable: nameLable, loginNameLabel: loginNameLabel, descriptionLable: descriptionLable)
     }
     
     // MARK:  action button
     @objc private func didTapLogoutButton() {
-        //LogOUT
+        showOutAlert()
     }
+    
+}
+
+//MARK: - Show alert
+private extension ProfileViewController {
+    
+    private func showOutAlert() {
+        let alert = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert )
+        let alertYesAction = UIAlertAction(title: "Да", style: .default) {[weak self] _ in
+            guard let self = self else { return  }
+            self.presenter.logOut()
+        }
+        let alertNoAction = UIAlertAction(title: "Нет", style: .default)
+        
+        alert.addAction(alertYesAction)
+        alert.addAction(alertNoAction)
+        self.present(alert, animated: true)
+    }
+    
 }
 
 //MARK: - Set constraint UI elements
 private extension ProfileViewController {
     private func setConstraint() {
         view.backgroundColor = .YPBlack
-        
         // Avatar ImageView
         view.addSubview(avatarImageView)
-        avatarImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        avatarImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18).isActive = true
-        avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 76).isActive = true
         avatarImageView.layer.masksToBounds = true
         avatarImageView.backgroundColor = .clear
         
         //Name label
         view.addSubview(nameLable)
-        nameLable.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        nameLable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  18).isActive = true
-        nameLable.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8).isActive = true
-        nameLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 18).isActive = true
         
         //loginName Label
         view.addSubview(loginNameLabel)
-        loginNameLabel.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 8).isActive = true
-        loginNameLabel.leadingAnchor.constraint(equalTo: nameLable.leadingAnchor).isActive = true
         
         //description Lable
         view.addSubview(descriptionLable)
-        descriptionLable.leadingAnchor.constraint(equalTo: loginNameLabel.leadingAnchor).isActive = true
-        descriptionLable.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor , constant: 8).isActive = true
         
         //logout Button
         view.addSubview(logoutButton)
         logoutButton.tintColor = .logOutButtonColor
-        logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
-        logoutButton.heightAnchor.constraint(equalToConstant: 22).isActive = true
-        logoutButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        NSLayoutConstraint.activate([
+            avatarImageView.heightAnchor.constraint(equalToConstant: 70),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 70),
+            avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
+            avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: 32),
+            
+            
+            nameLable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  18),
+            nameLable.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
+            nameLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 18),
+            
+            loginNameLabel.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 8),
+            loginNameLabel.leadingAnchor.constraint(equalTo: nameLable.leadingAnchor),
+            
+            descriptionLable.leadingAnchor.constraint(equalTo: loginNameLabel.leadingAnchor),
+            descriptionLable.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor , constant: 8),
+            
+            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor),
+            logoutButton.heightAnchor.constraint(equalToConstant: 22),
+            logoutButton.widthAnchor.constraint(equalToConstant: 20)
+        ])
     }
 }

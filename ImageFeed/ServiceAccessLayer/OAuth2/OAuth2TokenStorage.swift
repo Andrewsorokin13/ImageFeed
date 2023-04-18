@@ -16,5 +16,11 @@ final class OAuth2TokenStorage  {
             keychainWrapper.set(newValue, forKey: codeKey)
         }
     }
+    
+    var deleteToken: Bool {
+        return  keychainWrapper.removeObject(forKey: codeKey)
+    }
+    
+    
 }
 

@@ -1,7 +1,20 @@
 import Foundation
 
-//MARK: - WebViewViewController URLRequest
-extension WebViewViewController {
+final class WebViewPresenter {
+    
+   weak var vc: WebViewViewController?
+    
+    init(vc: WebViewViewController? = nil) {
+        self.vc = vc
+    }
+    
+    
+     func updateProgress() {
+        guard let vc = vc else { return  }
+        vc.progressView.progress = Float(vc.webView.estimatedProgress)
+        vc.progressView.isHidden = fabs(vc.webView.estimatedProgress - 1.0) <= 0.0001
+    }
+    
     func urlRequest() -> URLRequest? {
         var urlComponets = URLComponents(string: Constants.UnsplashAPI.authorizURL)
         urlComponets?.queryItems = [
@@ -13,5 +26,9 @@ extension WebViewViewController {
         ]
         guard let url = urlComponets?.url else { return nil }
         return URLRequest(url: url)
+    }
+    
+     func didTapBackButton() {
+         vc?.dismiss(animated: true, completion: nil)
     }
 }

@@ -12,10 +12,10 @@ final class OAuth2Service {
     //MARK: - Private set property
     private (set) var authToken: String? {
         get {
-            return OAuth2TokenStorage().token
+            return oAuthStorage.token
         }
         set {
-            OAuth2TokenStorage().token = newValue
+            oAuthStorage.token = newValue
         } }
     
     //MARK: - Public property
@@ -28,7 +28,7 @@ final class OAuth2Service {
         task?.cancel()
         lastCode = code
         guard let request = authTokenRequest(code: code) else { return  }
-        let task = object(for: request) { [weak self] result in
+        _ = object(for: request) { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
