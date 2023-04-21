@@ -1,10 +1,11 @@
 import Foundation
+import UIKit
 
 final class SplashViewPresenter {
     
     //MARK: - private property
     private let profileService = ProfileService.shared
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let oauth2TokenStorage = OAuth2TokenStorage.shared
     private let oauth2Service = OAuth2Service()
     private let imagesListService = ImagesListService.shared
     
@@ -16,6 +17,7 @@ final class SplashViewPresenter {
     //MARK: - init
     init(vc: SplashViewController? = nil) {
         self.vc = vc
+        self.alertPresenter = AlertPresenter(viewController: vc)
     }
     
     //MARK: - method
@@ -25,7 +27,7 @@ final class SplashViewPresenter {
             guard let self = self else { return }
             switch result {
             case .success (let token):
-                    self.fetchProfile(token: token)
+                self.fetchProfile(token: token)
             case .failure:
                 assertionFailure()
                 UIBlockingProgressHUD.dismiss()
@@ -37,6 +39,7 @@ final class SplashViewPresenter {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [weak self] in
             guard let self = self else { return }
             if let token = self.oauth2Service.authToken {
+                UIBlockingProgressHUD.show()
                 self.fetchProfile(token: token)
             } else {
                 self.vc?.showAuthViewController()
@@ -49,8 +52,8 @@ final class SplashViewPresenter {
             guard let self = self else { return }
             switch result {
             case .success:
-                    self.vc?.switchToTabBarController()
-                    UIBlockingProgressHUD.dismiss()
+                self.vc?.switchToTabBarController()
+                UIBlockingProgressHUD.dismiss()
             case .failure:
                 UIBlockingProgressHUD.dismiss()
                 self.alertPresenter?.creationAlert(title: "Что-то пошло не так", messange: "Не удалось войти в систему", completion: nil)

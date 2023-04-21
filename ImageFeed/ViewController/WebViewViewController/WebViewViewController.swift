@@ -1,11 +1,12 @@
 import UIKit
 import WebKit
 
-final class WebViewViewController: UIViewController {
-
+final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
+    
     //MARK: - UI Elemets
     private (set) lazy var webView: WKWebView = {
-        WKWebView()
+        let webView = WKWebView()
+        return webView
     }()
     
     private (set) lazy var progressView: UIProgressView = {
@@ -23,24 +24,27 @@ final class WebViewViewController: UIViewController {
     
     //MARK: - Public property
     weak var delegate: WebViewViewControllerDelegate?
-    var presenter: WebViewPresenter!
+    var presenter: WebViewPresenterProtocol?
+    
+    //MARK: - Action button
+    @objc private func didTapBackButton() {
+        dismiss(animated: true)
+    }
+}
+
+extension WebViewViewController {
     
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = WebViewPresenter(vc: self)
-        setupConstraint()
         webView.navigationDelegate = self
-   
-        if let request = presenter.urlRequest() {
-            webView.load(request)
-        }
+        presenter?.viewDidLoad()
+        setupConstraint()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         webView.addObserver( self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-        presenter.updateProgress()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,7 +54,7 @@ final class WebViewViewController: UIViewController {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            presenter.updateProgress()
+            presenter?.didUpdateProgressValue(webView.estimatedProgress)
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
@@ -59,13 +63,10 @@ final class WebViewViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    //MARK: - Action button
-    @objc private func didTapBackButton() {
-        presenter.didTapBackButton()
-    }
-    
 }
+
+
+
 
 //MARK: - Setup Constraint UI
 private extension  WebViewViewController {
@@ -83,6 +84,7 @@ private extension  WebViewViewController {
         //Web view
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.accessibilityIdentifier = "UnsplashWebView"
         
         NSLayoutConstraint.activate([
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -93,7 +95,7 @@ private extension  WebViewViewController {
             progressView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
             progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 1),
+            progressView.heightAnchor.constraint(equalToConstant: 2),
             
             webView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),

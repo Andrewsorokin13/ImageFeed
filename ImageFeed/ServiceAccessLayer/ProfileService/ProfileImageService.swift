@@ -4,7 +4,7 @@ final class ProfileImageService {
     
     //MARK: - Private property
     private let urlSession = URLSession.shared
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let oauth2TokenStorage = OAuth2TokenStorage.shared
     
     private var task: URLSessionTask?
     private var lastUsername:String?

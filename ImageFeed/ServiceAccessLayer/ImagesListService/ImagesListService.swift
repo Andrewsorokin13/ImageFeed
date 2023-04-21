@@ -7,7 +7,7 @@ final class ImagesListService {
     private var lastLoadedPage: Int?
     private var task: URLSessionTask?
     
-    private let tokenStorage = OAuth2TokenStorage()
+    private let tokenStorage = OAuth2TokenStorage.shared
     private let urlSession = URLSession.shared
     private  let formatter = ISO8601DateFormatter()
     

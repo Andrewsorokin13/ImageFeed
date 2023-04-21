@@ -49,6 +49,7 @@ final class ImageViewController: UIViewController {
         setupConstraintView()
         setContentSize()
         
+
         presenter.setImage(imageView: imageView)
     }
     
@@ -95,19 +96,21 @@ private extension ImageViewController {
         //Back Button
         view.addSubview(backButton)
         backButton.tintColor = .white
-        
+        backButton.accessibilityIdentifier = "navBackButtonwWite"
         //Share Button
         view.addSubview(sharedButton)
         
         //Image View
         scrollView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.accessibilityIdentifier = "ImageView"
         
         NSLayoutConstraint.activate([
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.heightAnchor.constraint(equalToConstant: 40),
             backButton.widthAnchor.constraint(equalToConstant: 40),
+            
             
             sharedButton.heightAnchor.constraint(equalToConstant: 50),
             sharedButton.widthAnchor.constraint(equalToConstant: 50),

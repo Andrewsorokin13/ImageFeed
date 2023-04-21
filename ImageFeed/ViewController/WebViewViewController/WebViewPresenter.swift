@@ -1,34 +1,34 @@
 import Foundation
 
-final class WebViewPresenter {
+final class WebViewPresenter: WebViewPresenterProtocol {
     
-   weak var vc: WebViewViewController?
+    weak var view: WebViewViewControllerProtocol?
+    var authHelper: AuthHelperProtocol
     
-    init(vc: WebViewViewController? = nil) {
-        self.vc = vc
+    init(authHelper: AuthHelperProtocol) {
+        self.authHelper = authHelper
     }
     
-    
-     func updateProgress() {
-        guard let vc = vc else { return  }
-        vc.progressView.progress = Float(vc.webView.estimatedProgress)
-        vc.progressView.isHidden = fabs(vc.webView.estimatedProgress - 1.0) <= 0.0001
+    func code(from url: URL) -> String? {
+        authHelper.code(from: url)
     }
     
-    func urlRequest() -> URLRequest? {
-        var urlComponets = URLComponents(string: Constants.UnsplashAPI.authorizURL)
-        urlComponets?.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.UnsplashAPI.accessKey),
-            URLQueryItem(name: "client_secret", value: Constants.UnsplashAPI.secretKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.UnsplashAPI.redirectURI),
-            URLQueryItem(name: "response_type", value: Constants.UnsplashAPI.code),
-            URLQueryItem(name: "scope", value: Constants.UnsplashAPI.scope)
-        ]
-        guard let url = urlComponets?.url else { return nil }
-        return URLRequest(url: url)
+    func didUpdateProgressValue(_ newValue: Double) {
+        let progressValue = Float(newValue)
+        view?.setProgressValue(progressValue)
+        
+        let hidenProgressView = isHiddenProgress(for: progressValue)
+        view?.setProgressHidden(hidenProgressView)
     }
     
-     func didTapBackButton() {
-         vc?.dismiss(animated: true, completion: nil)
+    func viewDidLoad() {
+        let request = authHelper.authRequest()
+        view?.load(request: request)
+        didUpdateProgressValue(0)
+    }
+    
+    func isHiddenProgress(for value: Float) -> Bool {
+        abs(value - 1.0) <= 0.0001
     }
 }
+

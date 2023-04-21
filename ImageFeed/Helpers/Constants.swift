@@ -25,15 +25,5 @@ struct Constants {
         static let profileBarButtonImage = "tab_profile_active"
         static let imagelistBarButtonImage = "tab_editorial_active"
     }
-    
-    struct UnsplashAPI {
-        static let authorizURL = "https://unsplash.com/oauth/authorize"
-        static let accessKey = "wOxFRUzch7zue7IbCjOTpvZUEdrcvxSMGIKChG3bLGc"
-        static let secretKey = "aVizbi_3xSwj0DB6jK0ntUu7CBpwDTXKN6Whatlzlio"
-        static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
-        static let code = "code"
-        static let scope = "public+read_user+write_likes"
-        static let authpath = "oauth/authorize/native"
-    }
 }
 

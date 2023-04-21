@@ -6,6 +6,10 @@ final class OAuth2TokenStorage  {
     private let keychainWrapper = KeychainWrapper.standard
     private let codeKey = "code"
     
+    static let shared = OAuth2TokenStorage()
+    
+    private init () {}
+    
     //MARK: - Calculate  property
     var token: String? {
         get {

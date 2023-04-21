@@ -24,6 +24,7 @@ final class ImagesListCell: UITableViewCell {
         imageCell.layer.masksToBounds = true
         imageCell.layer.cornerRadius = 16
         gradientView.backgroundColor = .clear
+        likeButton.accessibilityIdentifier = "likeButton"
     }
     
     override func prepareForReuse() {

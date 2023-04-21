@@ -4,7 +4,7 @@ final class OAuth2Service {
     
     //MARK: - Private property
     private let urlSession = URLSession.shared
-    private let oAuthStorage = OAuth2TokenStorage()
+    private let oAuthStorage = OAuth2TokenStorage.shared
     
     private var task: URLSessionTask?
     private var lastCode: String?
@@ -59,9 +59,9 @@ final class OAuth2Service {
     private func authTokenRequest(code: String) -> URLRequest? {
         URLRequest.makeHTTPRequest(
             path: "/oauth/token"
-            + "?client_id=\(Constants.UnsplashAPI.accessKey)"
-            + "&&client_secret=\(Constants.UnsplashAPI.secretKey)"
-            + "&&redirect_uri=\(Constants.UnsplashAPI.redirectURI)"
+            + "?client_id=\(AuthConfiguration.standart.accessKey)"
+            + "&&client_secret=\(AuthConfiguration.standart.secretKey)"
+            + "&&redirect_uri=\(AuthConfiguration.standart.redirectURI)"
             + "&&code=\(code)"
             + "&&grant_type=authorization_code",
             httpMethod: "POST",

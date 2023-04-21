@@ -12,6 +12,6 @@ struct ProfileResult: Decodable {
         case username
         case firstName = "first_name"
         case lastName = "last_name"
-        case bio = "bio"
+        case bio
     }
 }
