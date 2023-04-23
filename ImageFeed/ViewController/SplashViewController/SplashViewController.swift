@@ -64,6 +64,8 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
 }
 
+
+
 private extension SplashViewController {
     private func setConstraint() {
         view.backgroundColor = .YPBlack
